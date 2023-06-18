@@ -7,7 +7,7 @@
     "build": "rm -rf dist && tsc",
     "start": "node dist/server.js",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
-    "test": "npm run pre-test && cross-env NODE_ENV=test jasmine-ts \"./dist/**/*.spec.js\"",
+    "test": "npm run build && npm run pre-test && cross-env NODE_ENV=test jasmine-ts \"./dist/**/*.spec.js\"",
     "pre-test": "db-migrate reset -e test && db-migrate -e test up",
     "migrate-up": "db-migrate up",
     "migrate-down": "db-migrate down",
