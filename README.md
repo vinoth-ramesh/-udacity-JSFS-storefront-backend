@@ -17,7 +17,7 @@ An API for a storefront application. This project is a part of the [Udacity Full
 
 ## Environment Variables
 
-To run this project, rename the `.env.example` file to `.env` and
+To run this project, create a `.env` file and add below lines and
 edit accordingly.
 
 ```
@@ -56,6 +56,7 @@ Install dependencies
 ```
 
 Setup database
+(Assuming the postgres DB is running locally)
 
 ```
   CREATE USER store_db_user WITH PASSWORD 'store123';
