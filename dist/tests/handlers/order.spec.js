@@ -15,14 +15,14 @@ describe("/orders route", () => {
         await (0, resetTables_1.resetTables)();
         const store = new User_1.default();
         const user = {
-            first_tName: "John",
-            last_Name: "Doe",
-            user_name: "john",
+            firstName: "John",
+            lastName: "Doe",
+            username: "john",
             password: "password",
         };
         authedUser = await store.create(user);
         const res = await (0, supertest_1.default)(app_1.default).post("/users/authenticate").send({
-            user_name: "john",
+            username: "john",
             password: "password",
         });
         token = res.body.token;
@@ -54,9 +54,9 @@ describe("/orders route", () => {
             .post("/orders")
             .set("Authorization", `Bearer ${token}`)
             .send({
-                user_id: authedUser.id,
-                status: "active",
-            });
+            user_id: authedUser.id,
+            status: "active",
+        });
         expect(result.status).toEqual(200);
         expect(result.body.user_id).toEqual(authedUser.id);
     });
@@ -65,8 +65,8 @@ describe("/orders route", () => {
             .put("/orders/1")
             .set("Authorization", `Bearer ${token}`)
             .send({
-                status: "complete",
-            });
+            status: "complete",
+        });
         expect(result.status).toEqual(200);
         expect(result.body.status).toEqual("complete");
     });
@@ -82,9 +82,9 @@ describe("/orders route", () => {
             .post("/orders/1/products")
             .set("Authorization", `Bearer ${token}`)
             .send({
-                productId: 1,
-                quantity: 2,
-            });
+            productId: 1,
+            quantity: 2,
+        });
         expect(result.status).toEqual(200);
         expect(result.body.quantity).toEqual(2);
     });

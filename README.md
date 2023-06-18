@@ -86,10 +86,10 @@ Run migrations
   npm run migrate-up
 ```
 
-Start the server
+Run migrations
 
 ```bash
-  npm run watch
+  npm run build
 ```
 
 ## Running Tests
@@ -98,4 +98,10 @@ To run tests, run the following command
 
 ```bash
   npm run test
+```
+
+Start the server
+
+```bash
+  npm run start
 ```

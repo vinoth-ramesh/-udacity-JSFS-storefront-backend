@@ -46,10 +46,10 @@ describe("/products route", () => {
             .post("/products")
             .set("Authorization", `Bearer ${token}`)
             .send({
-                name: "Apple",
-                price: 100.99,
-                category: "fruits",
-            });
+            name: "Apple",
+            price: 100.99,
+            category: "fruits",
+        });
         expect(result.status).toEqual(201);
         expect(result.body.name).toEqual("Apple");
     });
