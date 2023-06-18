@@ -1,10 +1,12 @@
 import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 
-const app: express.Application = express();
-const PORT = process.env.PORT || 5000;
+require("dotenv").config();
 
-const domain = "0.0.0.0";
+const app: express.Application = express();
+const PORT = process.env.PORT || 3000;
+
+const domain = "localhost";
 
 const address: string = domain.concat(":", PORT.toString());
 
