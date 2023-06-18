@@ -66,6 +66,6 @@
   "exclude": [
     "spec",
     "node_modules",
-    "./dist"
+    "dist"
   ]
 }
