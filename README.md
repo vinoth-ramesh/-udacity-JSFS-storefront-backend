@@ -1,11 +1,13 @@
 # Storefront Backend Project
 
-## Getting Started
+An API for a storefront application. This project is a part of the [Udacity Full Stack Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd0044).
 
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
+## Requirements
 
-## Required Technologies
-Your application must make use of the following libraries:
+[REQUIREMENTS.md](REQUIREMENTS.md)
+
+## Tech Stack
+
 - Postgres for the database
 - Node/Express for the application logic
 - dotenv from npm for managing environment variables
@@ -13,42 +15,86 @@ Your application must make use of the following libraries:
 - jsonwebtoken from npm for working with JWTs
 - jasmine from npm for testing
 
-## Steps to Completion
+## Environment Variables
 
-### 1. Plan to Meet Requirements
+To run this project, rename the `.env.example` file to `.env` and
+edit accordingly.
 
-In this repo there is a `REQUIREMENTS.md` document which outlines what this API needs to supply for the frontend, as well as the agreed upon data shapes to be passed between front and backend. This is much like a document you might come across in real life when building or extending an API. 
+```
+PG_HOST=127.0.0.1 # Postgres host
+PG_DB=store_db # Postgres database
+PG_DB_TEST=store_db_test # Postgres test database
+PG_USER=store_db_user # Postgres user
+PG_PASSWORD=store123 # Postgres database password
+PG_PORT=5432 # Postgres port
 
-Your first task is to read the requirements and update the document with the following:
-- Determine the RESTful route for each endpoint listed. Add the RESTful route and HTTP verb to the document so that the frontend developer can begin to build their fetch requests.    
-**Example**: A SHOW route: 'blogs/:id' [GET] 
+BCRYPT_PASSWORD=all-is-well-in-the-world
+SALT_ROUNDS=10
+TOKEN_SECRET=have-this-token-very-safe # JWT
 
-- Design the Postgres database tables based off the data shape requirements. Add to the requirements document the database tables and columns being sure to mark foreign keys.   
-**Example**: You can format this however you like but these types of information should be provided
-Table: Books (id:varchar, title:varchar, author:varchar, published_year:varchar, publisher_id:string[foreign key to publishers table], pages:number)
+PORT=4000 # app port
+```
 
-**NOTE** It is important to remember that there might not be a one to one ratio between data shapes and database tables. Data shapes only outline the structure of objects being passed between frontend and API, the database may need multiple tables to store a single shape. 
+## Run Locally
 
-### 2.  DB Creation and Migrations
+Clone the project
 
-Now that you have the structure of the databse outlined, it is time to create the database and migrations. Add the npm packages dotenv and db-migrate that we used in the course and setup your Postgres database. If you get stuck, you can always revisit the database lesson for a reminder. 
+```bash
+  git clone https://github.com/vinoth-ramesh/-udacity-JSFS-storefront-backend.git
+```
 
-You must also ensure that any sensitive information is hashed with bcrypt. If any passwords are found in plain text in your application it will not pass.
+Go to the project directory
 
-### 3. Models
+```bash
+  cd storefront-backend
+```
 
-Create the models for each database table. The methods in each model should map to the endpoints in `REQUIREMENTS.md`. Remember that these models should all have test suites and mocks.
+Install dependencies
 
-### 4. Express Handlers
+```bash
+  npm install
+```
 
-Set up the Express handlers to route incoming requests to the correct model method. Make sure that the endpoints you create match up with the enpoints listed in `REQUIREMENTS.md`. Endpoints must have tests and be CORS enabled. 
+Setup database
 
-### 5. JWTs
+```
+  CREATE USER store_db_user WITH PASSWORD 'store123';
 
-Add JWT functionality as shown in the course. Make sure that JWTs are required for the routes listed in `REQUIUREMENTS.md`.
+  CREATE DATABASE store_db;
 
-### 6. QA and `README.md`
+  CREATE DATABASE store_db_test;
 
-Before submitting, make sure that your project is complete with a `README.md`. Your `README.md` must include instructions for setting up and running your project including how you setup, run, and connect to your database. 
+  GRANT ALL ON SCHEMA public TO store_db_user;
 
-Before submitting your project, spin it up and test each endpoint. If each one responds with data that matches the data shapes from the `REQUIREMENTS.md`, it is ready for submission!
+  \c store_db
+
+  GRANT ALL PRIVILEGES ON DATABASE store_db TO store_db_user;
+
+  GRANT ALL ON SCHEMA public TO store_db_user; 
+
+  \c store_db_test
+
+  GRANT ALL PRIVILEGES ON DATABASE store_db_test TO store_db_user;
+
+  GRANT ALL ON SCHEMA public TO store_db_user; 
+```
+
+Run migrations
+
+```bash
+  npm run migrate-up
+```
+
+Start the server
+
+```bash
+  npm run watch
+```
+
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  npm run test
+```
